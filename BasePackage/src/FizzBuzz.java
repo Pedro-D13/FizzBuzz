@@ -1,37 +1,31 @@
-import javafx.util.Pair;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class FizzBuzz {
     public static void main(String[] args) {
-        countTo();
-
+        int MaxNum = 255;
+        CaseFactory Fizz = new CaseFactory(3, "Fizz");
+        CaseFactory Buzz = new CaseFactory(5, "Buzz");
+        CaseFactory Bang = new CaseFactory(7, "Bang");
+        CaseFactory Bong = new CaseFactory(11, "Bong");
+        CaseFactory Fezz = new CaseFactory(11, "Fezz");
+        countTo(Fizz, Buzz, Bang, Bong);
     }
 
 
-    public static void countTo() {
-        Map<Integer, String> keyNumberDict = new HashMap<Integer, String>();
-        keyNumberDict.put(3, "Fizz");
-        keyNumberDict.put(5, "Buzz");
-        ArrayList<String> finalArray = new ArrayList<String>();
-        for (int i = 1; i < 101; i++) {
+    public static void countTo(CaseFactory fizz, CaseFactory Buzz, CaseFactory Bang, CaseFactory Bong) {
+        for (int i = 1; i < 256+1; i++) {
             String result = "";
-            for (Integer num : keyNumberDict.keySet()) {
-                result += (i % num == 0) ? keyNumberDict.get(num) : "";
-            }
-
-            if (result.isEmpty()) {
-                System.out.println(i);
-            } else {
-                System.out.println(result);
-            }
+            result = fizz.checkCondition(result, i);
+            result = Buzz.checkCondition(result, i);
+            result = Bang.checkCondition(result, i);
+            System.out.println(
+                    result.isEmpty() ? i : result
+            );
         }
 
+    }
+
+    public static void askUserMaxNum() {
 
     }
+
 
 }
